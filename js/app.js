@@ -34,14 +34,6 @@ $(function(){
     selectNext();
   });
 
-  $('.mainImg').mouseover(function() {
-    $('.mainNavPrev').css('opacity', 0.65);
-    $('.mainNavNext').css('opacity', 0.65);
-  }).mouseout(function() {
-    $('.mainNavPrev').css('opacity', 0);
-    $('.mainNavNext').css('opacity', 0);
-  });
-
   var selectNext = function() {
     $('.selected').removeClass('selected');
     if (curIdx < (thumbsLength - 1)) {
