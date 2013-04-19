@@ -7,6 +7,16 @@ $(function(){
   var thumbWidth = 65;
   var curIdx = 0;
 
+  // keydown handlers for navigation
+  $("body").on('keydown', function(e) {
+    if(e.keyCode === 39) { // right
+      selectNext();
+    } else if(e.keyCode === 37) { // left
+      selectPrev();
+    }
+  });
+
+  // click handlers for navigation
   $('.bottomNavFrame').on('click', '.btnRight', function(evt) {
     evt.stopPropagation();
     selectNext();
@@ -15,7 +25,7 @@ $(function(){
   $('.mainImg').on('click', '.mainNavNext', function(evt) {
     evt.stopPropagation();
     selectNext();
-  })
+  });
 
   $('.bottomNavFrame').on('click', '.btnLeft', function(evt) {
     evt.stopPropagation();
@@ -34,6 +44,7 @@ $(function(){
     selectNext();
   });
 
+  // helper methods for photo swapping
   var selectNext = function() {
     $('.selected').removeClass('selected');
     if (curIdx < (thumbsLength - 1)) {
@@ -85,10 +96,3 @@ $(function(){
   }
 
 });
-
-
-
-
-
-
-
