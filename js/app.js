@@ -1,13 +1,14 @@
 $(function(){
 
   var $thumbs = $('.thumbnailInnerWrap');
-  var $mainImg = $('.bigImg');
+  var $mainImgs = $('.mainImgInnerWrap');
   var thumbsLength = $thumbs[0].children.length;
   var thumbsShowing = 6;
   var thumbWidth = 65;
+  var mainWidth = 436;
   var curIdx = 0;
 
-  // keydown handlers for navigation
+  // Nav key handlers
   $("body").on('keydown', function(e) {
     if(e.keyCode === 39) { // right
       selectNext();
@@ -16,7 +17,7 @@ $(function(){
     }
   });
 
-  // click handlers for navigation
+  // Nav click handlers
   $('.bottomNavFrame').on('click', '.btnRight', function(evt) {
     evt.stopPropagation();
     selectNext();
@@ -44,55 +45,85 @@ $(function(){
     selectNext();
   });
 
-  // helper methods for photo swapping
+  // Photo Nav
   var selectNext = function() {
-    $('.selected').removeClass('selected');
+    removeSelectedClasses();
     if (curIdx < (thumbsLength - 1)) {
-      if (curIdx < (thumbsLength - thumbsShowing)) {
-        $thumbs.animate({
-          'margin-left': '-'+( thumbWidth * (curIdx + 1))+'px'
-        });
-      }
+      animateImagesRight();
       curIdx++;
-      setMainImg();
       selectThumbnail();
     } else {
       curIdx = 0;
-      $thumbs.animate({
-        'margin-left': '-'+( thumbWidth * (curIdx))+'px'
-      });
-      setMainImg();
+      animateImagesToStart();
       selectThumbnail();
     }
   };
 
   var selectPrev = function() {
-    $('.selected').removeClass('selected');
+    removeSelectedClasses();
     if (curIdx > 0) {
       curIdx--;
-      if (curIdx < (thumbsLength - thumbsShowing)) {
-        $thumbs.animate({
-          'margin-left': '-'+( thumbWidth * (curIdx))+'px'
-        });
-      }
-      setMainImg();
+      animateImagesLeft();
       selectThumbnail();
     } else {
       curIdx = thumbsLength - 1;
-      $thumbs.animate({
-        'margin-left': '-'+( thumbWidth * (curIdx + 1  - thumbsShowing))+'px'
-      });
-      setMainImg();
+      animateImagesToEnd();
       selectThumbnail();
     }
   };
 
-  var setMainImg = function() {
-    $($mainImg).attr('src', 'public/'+(curIdx + 1)+'-large.png');
+  // Photo Nav Helpers
+  var removeSelectedClasses = function() {
+    $('.selected').removeClass('selected');
+    $('.mainSelected').removeClass('mainSelected');
   };
 
   var selectThumbnail = function() {
     $($thumbs[0].children[curIdx]).addClass('selected');
-  }
+    $($mainImgs[0].children[curIdx]).addClass('mainSelected');
+  };
 
+  var animateImagesLeft = function() {
+    if (curIdx < (thumbsLength - thumbsShowing)) {
+      $thumbs.animate({
+        'margin-left': '-'+( thumbWidth * (curIdx))+'px'
+      });
+    }
+    if (curIdx >= 0) {
+      $mainImgs.animate({
+        'margin-left': '-'+( mainWidth * (curIdx))+'px'
+      });
+    }
+  };
+
+  var animateImagesRight = function() {
+    if (curIdx < (thumbsLength - thumbsShowing)) {
+      $thumbs.animate({
+        'margin-left': '-'+( thumbWidth * (curIdx + 1))+'px'
+      });
+    }
+    if (curIdx <= (thumbsLength - 1)) {
+      $mainImgs.animate({
+        'margin-left': '-'+( mainWidth * (curIdx + 1))+'px'
+      });
+    }
+  };
+
+  var animateImagesToStart = function() {
+    $thumbs.animate({
+      'margin-left': '-'+( thumbWidth * (curIdx))+'px'
+    });
+    if (curIdx <= (thumbsLength - 1)) {
+      $mainImgs.css('margin-left', '-'+( mainWidth * (curIdx))+'px');
+    }
+  };
+
+  var animateImagesToEnd = function() {
+    $thumbs.animate({
+      'margin-left': '-'+( thumbWidth * (curIdx + 1  - thumbsShowing))+'px'
+    });
+    if (curIdx === (thumbsLength - 1)) {
+      $mainImgs.css('margin-left', '-'+( mainWidth * (curIdx))+'px');
+    }
+  };
 });

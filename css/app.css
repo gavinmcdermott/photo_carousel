@@ -1,10 +1,13 @@
+/************************
+Keyframe Animations
+************************/
 @-webkit-keyframes mainImgNavOpacity {
   0%   { opacity: 0; }
-  100% { opacity: 0.25; }
+  100% { opacity: 0.28; }
 }
 @keyframes mainImgNavOpacity {
   0%   { opacity: 0; }
-  100% { opacity: 0.25; }
+  100% { opacity: 0.28; }
 }
 
 @-webkit-keyframes thumbNailOpacity {
@@ -16,6 +19,9 @@
   100% { opacity: 1; }
 }
 
+/************************
+Base Styling
+************************/
 html, body {
   margin: 0;
   padding: 0;
@@ -34,36 +40,52 @@ html, body {
   border-radius: 3px 3px 3px 3px;
 }
 
+/************************
+Main Image & Main Img Nav
+************************/
 .mainImgFrame {
   width: 436px;
   height: 331px;
 }
 
-.mainImg {
+.mainImgOuterWrap {
   width: 436px;
   height: 327px;
   background-color: #F1F1F1;
   position: relative;
   -webkit-border-radius: 3px 3px 3px 3px;
   border-radius: 3px 3px 3px 3px;
+  float: left;
+  overflow: hidden;
+  display: block;
 }
 
-.mainImg table {
+.mainImgOuterWrap table {
   width: 100%;
   height: 100%;
-  border: 0;
-  padding: 0;
-  margin: 0;
 }
 
-.mainImg table td {
+.mainImgOuterWrap table td {
   vertical-align: middle;
   text-align: center;
 }
 
-.bottomNavFrame {
-  height: 48px;
+.mainImgInnerWrap {
+  width: 9999px;
+}
+
+.mainImg {
   width: 436px;
+  height: 327px;
+  float: left;
+  position: relative;
+  -webkit-transition: all .5s ease-in-out;
+  opacity: 0;
+}
+
+.mainSelected {
+  opacity: 1;
+  -webkit-transition: all .5s ease-in-out;
 }
 
 .mainNavPrev {
@@ -71,7 +93,7 @@ html, body {
   height: 200px;
   width: 70px;
   top: 18%;
-  background-color: #1C1C1C;
+  background-color: #808080;
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -83,7 +105,7 @@ html, body {
 
 .mainNavPrev:active {
   -webkit-box-shadow: 3px 0px 5px 0px #696969;
-  background-color: black;
+  background-color: #4A4A4A;
 }
 
 .mainNavNext {
@@ -91,12 +113,11 @@ html, body {
   height: 200px;
   width: 70px;
   top: 18%;
-  left: 360px;
-  background-color: #1C1C1C;
+  left: 366px;
+  background-color: #808080;
   position: absolute;
   opacity: 0;
   cursor: pointer;
-  border-style: solid;
   -webkit-border-radius: 7px 0 0 7px;
   border-radius: 7px 0 0 7px;
   -webkit-user-select: none;
@@ -105,14 +126,23 @@ html, body {
 
 .mainNavNext:active {
   -webkit-box-shadow: -3px 0px 5px -2px #696969;
-  background-color: black;
+  background-color: #4A4A4A;
 }
 
-.mainImg:hover .mainNavPrev, .mainImg:hover .mainNavNext {
+.mainImgOuterWrap:hover .mainNavPrev,
+.mainImgOuterWrap:hover .mainNavNext {
   -webkit-animation: mainImgNavOpacity 0.5s; /* Safari 4+ */
   animation:         mainImgNavOpacity 0.5s;
   -webkit-animation-fill-mode: forwards;
   animation-fill-mode:         forwards;
+}
+
+/************************
+Thumbnails & Thumbnail Nav
+************************/
+.bottomNavFrame {
+  height: 48px;
+  width: 436px;
 }
 
 .btnLeft {
@@ -150,7 +180,6 @@ html, body {
 }
 
 .btnLeft:active, .btnRight:active {
-  border: 1px solid #444;
   border-bottom-color: #CCC;
   border-top-color: #D1D1D1;
   -webkit-box-shadow: inset 0 1px 2px #aaa;
