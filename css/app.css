@@ -1,10 +1,10 @@
 @-webkit-keyframes mainImgNavOpacity {
   0%   { opacity: 0; }
-  100% { opacity: 0.23; }
+  100% { opacity: 0.25; }
 }
 @keyframes mainImgNavOpacity {
   0%   { opacity: 0; }
-  100% { opacity: 0.23; }
+  100% { opacity: 0.25; }
 }
 
 @-webkit-keyframes thumbNailOpacity {
@@ -101,6 +101,11 @@ html, body {
   border-radius: 7px 0 0 7px;
   -webkit-user-select: none;
   -webkit-box-shadow: -7px 0px 8px -2px #696969;
+}
+
+.mainNavNext:active {
+  -webkit-box-shadow: -3px 0px 5px -2px #696969;
+  background-color: black;
 }
 
 .mainImg:hover .mainNavPrev, .mainImg:hover .mainNavNext {

@@ -22,7 +22,7 @@ $(function(){
     selectNext();
   });
 
-  $('.mainImg').on('click', '.mainNavNext', function(evt) {
+  $('.mainImgFrame').on('click', '.mainNavNext', function(evt) {
     evt.stopPropagation();
     selectNext();
   });
@@ -32,7 +32,7 @@ $(function(){
     selectPrev();
   });
 
-  $('.mainImg').on('click', '.mainNavPrev', function(evt) {
+  $('.mainImgFrame').on('click', '.mainNavPrev', function(evt) {
     evt.stopPropagation();
     selectPrev();
   });
